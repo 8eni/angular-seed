@@ -1,6 +1,16 @@
 # Angular 1.5 starter
 
-```
-npm run install
+Setup
+---
 
 ```
+npm install
+```
+
+
+
+Compile
+---
+
+```
+npm run compile
