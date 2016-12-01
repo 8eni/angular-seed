@@ -1,32 +1,27 @@
 var path = require('path');
-
-var config = {
-  context: path.join(__dirname, 'app'),
-  entry: [
-    './app.module.js',
-  ],
-  output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loaders: ['babel'],
-      },
-    ],
-  },
-  resolveLoader: {
-    root: [
-      path.join(__dirname, 'node_modules'),
-    ],
-  },
-  resolve: {
-    root: [
-      path.join(__dirname, 'node_modules'),
-    ],
-  },
-};
-module.exports = config;
+module.exports = {
+    module: {
+        loaders: [
+            {
+                test: /\.html$/,
+                loader: 'ngtemplate?relativeTo=' + (path.resolve(__dirname)) + '/app/!html'
+            },
+            {
+                test: /\.js?$/,
+                exclude: /(node_modules|bower_components)/,
+                loader: 'babel', // 'babel-loader' is also a legal name to reference
+                query: {
+                    presets: ['es2015'],
+                    cacheDirectory: true
+                }
+            }
+        ]
+    },
+    context: __dirname,
+    entry: "./app/index.js",
+    output: {
+        path: path.join(__dirname, "dist"),
+        filename: "bundle.js"
+    },
+    devtool: "source-map"
+}
